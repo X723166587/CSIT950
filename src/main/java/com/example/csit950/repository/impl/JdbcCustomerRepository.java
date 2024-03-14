@@ -20,13 +20,13 @@ public class JdbcCustomerRepository implements CustomerRepository {
 
     @Override
     public List<Customer> findAll() {
-        return jdbc.query("SELECT customer_id,customer_name,vip_active,vip_expire,address_id FROM Customer", this::mapRowToCustomer);
+        return jdbc.query("SELECT customer_id,customer_name,vip_status,vip_expire,customer_address,customer_phone FROM Customer", this::mapRowToCustomer);
     }
 
     @Override
     public Customer findOne(String customer_id) {
         // Adjusted to also select customer_id, even though it's known, for consistent mapping.
-        Customer customer = jdbc.queryForObject("SELECT customer_id,customer_name,vip_active,vip_expire,address_id FROM Customer WHERE customer_id = ?", this::mapRowToCustomer, customer_id);
+        Customer customer = jdbc.queryForObject("SELECT customer_id,customer_name,vip_status,vip_expire,customer_address,customer_phone FROM Customer WHERE customer_id = ?", this::mapRowToCustomer, customer_id);
         return customer;
     }
 
@@ -34,9 +34,10 @@ public class JdbcCustomerRepository implements CustomerRepository {
         return new Customer(
                 rs.getString("customer_id"), // This will now work for both methods.
                 rs.getString("customer_name"),
-                rs.getString("vip_active"),
+                rs.getString("vip_status"),
                 rs.getString("vip_expire"),
-                rs.getString("address_id"));
+                rs.getString("customer_address"),
+                rs.getString("customer_phone"));
     }
 
 
