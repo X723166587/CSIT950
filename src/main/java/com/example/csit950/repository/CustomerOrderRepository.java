@@ -7,4 +7,6 @@ public interface CustomerOrderRepository {
     Order save(Order order);
 
     Order findOne(String customer_id);
+
+    void updateOrderStatus(String order_id, String newStatus);
 }

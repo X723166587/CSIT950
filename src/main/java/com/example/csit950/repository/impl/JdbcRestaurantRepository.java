@@ -20,10 +20,10 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
 
     @Override
     public List<Restaurant> findRestaurant() {
-        return jdbc.query("SELECT restaurant_id,restaurant_name,restaurant_category,restaurant_rating,restaurant_revenue,restaurant_address,restaurant_phone,restaurant_hero_image FROM Restaurant", this::mapRowToCustomer);
+        return jdbc.query("SELECT restaurant_id,restaurant_name,restaurant_category,restaurant_rating,restaurant_revenue,restaurant_address,restaurant_phone,restaurant_hero_image FROM Restaurant", this::mapRowToRestaurant);
     }
 
-    private Restaurant mapRowToCustomer(ResultSet rs, int rowNum) throws SQLException {
+    private Restaurant mapRowToRestaurant(ResultSet rs, int rowNum) throws SQLException {
         return new Restaurant(
                 rs.getInt("restaurant_id"), // This will now work for both methods.
                 rs.getString("restaurant_name"),

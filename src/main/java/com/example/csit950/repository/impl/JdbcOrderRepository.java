@@ -62,4 +62,10 @@ public class JdbcOrderRepository implements CustomerOrderRepository {
         Order order = jdbcTemplate.queryForObject("SELECT order_id,restaurant_id,customer_id,order_status,comment,order_subtotal,order_rating,order_review,order_service_fee FROM CustomerOrder WHERE order_id = ?", this::mapRowToOrder, order_id);
         return order;
     }
+
+    public void updateOrderStatus(String order_id, String newStatus) {
+        String sql = "UPDATE CustomerOrder SET order_status = ? WHERE order_id = ?";
+        System.out.println("Updating order status to: '" + newStatus + "'");
+        jdbcTemplate.update(sql, newStatus, order_id);
+    }
 }
