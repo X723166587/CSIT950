@@ -30,6 +30,7 @@ public class JdbcCustomerRepository implements CustomerRepository {
         return customer;
     }
 
+
     private Customer mapRowToCustomer(ResultSet rs, int rowNum) throws SQLException {
         return new Customer(
                 rs.getString("customer_id"), // This will now work for both methods.
@@ -38,6 +39,13 @@ public class JdbcCustomerRepository implements CustomerRepository {
                 rs.getString("vip_expire"),
                 rs.getString("customer_address"),
                 rs.getString("customer_phone"));
+    }
+
+    @Override
+    public Customer save(Customer customer) {
+        String sql = "INSERT INTO Customer (customer_name, vip_status, vip_expire, customer_address, customer_phone) VALUES (?, ?, ?, ?, ?)";
+        jdbc.update(sql, customer.getCustomer_name(), customer.getVip_status(), customer.getVip_expire(), customer.getCustomer_address(), customer.getCustomer_phone());
+        return customer;
     }
 
 

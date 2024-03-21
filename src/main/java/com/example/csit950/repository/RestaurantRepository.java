@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface RestaurantRepository {
     List<Restaurant> findRestaurant();
+
+    Restaurant findRestaurantById(int restaurant_id);
 }

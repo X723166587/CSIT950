@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -67,5 +68,17 @@ public class JdbcOrderRepository implements CustomerOrderRepository {
         String sql = "UPDATE CustomerOrder SET order_status = ? WHERE order_id = ?";
         System.out.println("Updating order status to: '" + newStatus + "'");
         jdbcTemplate.update(sql, newStatus, order_id);
+    }
+
+    @Override
+    public List<Order> findOrdersByRestaurantId(String restaurant_id) {
+        String sql = "SELECT * FROM CustomerOrder WHERE restaurant_id = ?";
+        return jdbcTemplate.query(sql, this::mapRowToOrder, restaurant_id);
+    }
+
+    @Override
+    public void updateOrderReview(String order_id, String newReview) {
+        String sql = "UPDATE CustomerOrder SET order_review = ? WHERE order_id = ?";
+        jdbcTemplate.update(sql, newReview, order_id);
     }
 }

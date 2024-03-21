@@ -28,4 +28,9 @@ public class RestaurantController {
         return restaurantRepo.findRestaurant();
     }
 
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Restaurant findRestaurantById(@PathVariable("id") Integer restaurant_id) {
+        return restaurantRepo.findRestaurantById(restaurant_id);
+    }
 }

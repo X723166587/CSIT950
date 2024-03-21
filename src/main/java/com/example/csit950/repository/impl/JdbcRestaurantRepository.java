@@ -36,4 +36,11 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
         );
     }
 
+    @Override
+    public Restaurant findRestaurantById(int restaurant_id) {
+        String sql = "SELECT * FROM Restaurant WHERE restaurant_id = ?";
+        return jdbc.queryForObject(sql, this::mapRowToRestaurant, restaurant_id);
+    }
+
+
 }

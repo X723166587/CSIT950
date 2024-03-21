@@ -7,6 +7,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
@@ -40,4 +42,19 @@ public class OrderController {
         }
     }
 
+    @GetMapping("/restaurant/{restaurantId}")
+    @ResponseBody
+    public List<Order> findOrdersByRestaurantId(@PathVariable("restaurantId") String restaurant_id) {
+        return orderRepo.findOrdersByRestaurantId(restaurant_id);
+    }
+
+    @PatchMapping("/{orderId}/review")
+    public ResponseEntity<?> updateOrderReview(@PathVariable("orderId") String order_id, @RequestBody String newReview) {
+        try {
+            orderRepo.updateOrderReview(order_id, newReview);
+            return ResponseEntity.ok().body("Order review updated successfully.");
+        } catch (DataAccessException e) {
+            return ResponseEntity.badRequest().body("Failed to update order review: " + e.getMessage());
+        }
+    }
 }

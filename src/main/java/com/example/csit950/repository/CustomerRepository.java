@@ -9,6 +9,6 @@ public interface CustomerRepository {
 
     Customer findOne(String customer_id);
 
-
+    Customer save(Customer customer);
 
 }
