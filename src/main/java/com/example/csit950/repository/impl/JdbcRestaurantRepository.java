@@ -43,4 +43,11 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
     }
 
 
+    @Override
+    public void updateRestaurant(Restaurant restaurant) {
+        String sql = "UPDATE Restaurant SET restaurant_name = ?, restaurant_category = ?, restaurant_rating = ?, restaurant_revenue = ?, restaurant_address = ?, restaurant_phone = ?, restaurant_hero_image = ? WHERE restaurant_id = ?";
+        jdbc.update(sql, restaurant.getRestaurant_name(), restaurant.getRestaurant_category(), restaurant.getRestaurant_rating(), restaurant.getRestaurant_revenue(), restaurant.getRestaurant_address(), restaurant.getRestaurant_phone(), restaurant.getRestaurant_hero_image(), restaurant.getRestaurant_id());
+    }
+
+
 }

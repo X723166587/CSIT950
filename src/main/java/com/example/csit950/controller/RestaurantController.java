@@ -7,6 +7,7 @@ import com.example.csit950.model.Restaurant;
 import com.example.csit950.repository.CustomerOrderRepository;
 import com.example.csit950.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,4 +34,12 @@ public class RestaurantController {
     public Restaurant findRestaurantById(@PathVariable("id") Integer restaurant_id) {
         return restaurantRepo.findRestaurantById(restaurant_id);
     }
+
+    @PutMapping("/update/{restaurantId}")
+    public ResponseEntity<?> updateRestaurant(@PathVariable int restaurantId, @RequestBody Restaurant restaurant) {
+        restaurant.setRestaurant_id(restaurantId); // Ensure the ID is set correctly
+        restaurantRepo.updateRestaurant(restaurant);
+        return ResponseEntity.ok().body("Restaurant updated successfully.");
+    }
+
 }

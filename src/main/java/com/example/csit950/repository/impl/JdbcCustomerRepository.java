@@ -33,7 +33,7 @@ public class JdbcCustomerRepository implements CustomerRepository {
 
     private Customer mapRowToCustomer(ResultSet rs, int rowNum) throws SQLException {
         return new Customer(
-                rs.getString("customer_id"), // This will now work for both methods.
+                rs.getInt("customer_id"), // This will now work for both methods.
                 rs.getString("customer_name"),
                 rs.getString("vip_status"),
                 rs.getString("vip_expire"),

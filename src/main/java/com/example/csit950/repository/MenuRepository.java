@@ -7,4 +7,11 @@ import java.util.List;
 public interface MenuRepository {
 
     List<Menu> selectRestaurant(int restaurant_id);
+
+    void updateMenu(Menu menu);
+
+    void addMenu(Menu menu);
+
+    void deleteMenu(int menuId);
+
 }

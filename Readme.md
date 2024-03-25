@@ -45,22 +45,30 @@ Retrieves a list of all customers. The information includes customer ID, name, V
 
 ```json
 [
-{
-"customer_id": "1",
-"customer_name": "Alice Smith",
-"vip_status": "1",
-"vip_expire": "2024-12-31",
-"customer_address": "789 Hill Rd",
-"customer_phone": "555-7890"
-},
-{
-"customer_id": "2",
-"customer_name": "Bob Johnson",
-"vip_status": "0",
-"vip_expire": null,
-"customer_address": "321 Lake Ave",
-"customer_phone": "555-6543"
-}
+  {
+    "customer_id": 1,
+    "customer_name": "Alice Smith",
+    "vip_status": "active",
+    "vip_expire": "2024-12-31",
+    "customer_address": "789 Hill Rd",
+    "customer_phone": "555-7890"
+  },
+  {
+    "customer_id": 2,
+    "customer_name": "Bob Johnson",
+    "vip_status": "",
+    "vip_expire": null,
+    "customer_address": "321 Lake Ave",
+    "customer_phone": "555-6543"
+  },
+  {
+    "customer_id": 3,
+    "customer_name": "John Doe",
+    "vip_status": "active",
+    "vip_expire": "2024-12-31",
+    "customer_address": "123 Elm Street",
+    "customer_phone": "555-1234"
+  }
 ]
 ```
 
@@ -69,14 +77,13 @@ Retrieves a list of all customers. The information includes customer ID, name, V
 Obtains detailed information about a specific customer by their unique customer ID.
 ```json
 {
-  "customer_id": "1",
+  "customer_id": 1,
   "customer_name": "Alice Smith",
-  "vip_status": "1",
+  "vip_status": "active",
   "vip_expire": "2024-12-31",
   "customer_address": "789 Hill Rd",
   "customer_phone": "555-7890"
 }
-
 ```
 
 
@@ -105,14 +112,16 @@ Get all the item in menu from specific restaurant.
     "item_name": "Cappuccino",
     "item_price": 3.5,
     "item_image": "cappuccino.jpg",
-    "item_description": "A classic Italian coffee drink."
+    "item_description": "A classic Italian coffee drink.",
+    "item_category": null
   },
   {
     "item_id": 2,
     "item_name": "Espresso",
     "item_price": 2.5,
     "item_image": "espresso.jpg",
-    "item_description": "Strong and rich in flavor."
+    "item_description": "Strong and rich in flavor.",
+    "item_category": null
   }
 ]
 ```
@@ -180,14 +189,78 @@ Get specific restaurant details
 
 **POST** `/customer`:
 Create customer through register page
-````shell
+```shell
 curl -X POST http://localhost:8080/customer \
 -H "Content-Type: application/json" \
 -d '{
 "customer_name": "John Doe",
-"vip_status": "1",
+"vip_status": 1,
 "vip_expire": "2024-12-31",
 "customer_address": "123 Elm Street",
 "customer_phone": "555-1234"
 }'
 ```
+
+**PUT** `/menu/update/{item_id}`
+Update menu item details
+```shell
+curl -X PUT http://localhost:8080/menu/update/1 -H "Content-Type: application/json" -d '{
+    "item_name": "Updated Cheese Pizza",
+    "item_price": 10.99,
+    "item_image": "url_to_updated_cheese_pizza_image.jpg",
+    "item_description": "An updated description of the delicious cheese pizza.",
+    "item_category": "Main Course"
+}'
+```
+
+**POST** `/menu/update/{item_id}`
+Restaurant mange their menu.
+```shell
+curl -X POST http://localhost:8080/menu -H "Content-Type: application/json" -d '{
+    "item_name": "Cheese Pizza",
+    "restaurant_id": 1,
+    "item_price": 9.99,
+    "item_image": "http://example.com/pizza.jpg",
+    "item_description": "A delicious cheese pizza",
+    "item_category": "Main Course"
+}'
+```
+
+**DELETE** `/menu/{item_id}`
+Delete data from menu
+```shell
+curl -X DELETE http://localhost:8080/menu/7
+```
+
+**GET** `/api/orderitems/1`
+Get order items form specific order
+```json
+[
+  {
+    "orderId": 1,
+    "itemId": 1,
+    "quantity": 2
+  },
+  {
+    "orderId": 1,
+    "itemId": 2,
+    "quantity": 1
+  }
+]
+```
+
+
+
+**POST** `/api/orderitems`
+Insert order items to database
+```shell
+curl -X POST http://localhost:8080/api/orderitems \
+> -H "Content-Type: application/json" \
+> -d '[{"orderId": 2, "itemId": 2, "quantity": 1}, {"orderId": 2, "itemId": 13, "quantity": 1}]'
+```
+
+
+
+
+
+

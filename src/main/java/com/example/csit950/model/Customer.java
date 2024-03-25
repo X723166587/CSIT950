@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class Customer {
 
-    private String customer_id;
+    private Integer customer_id;
 
     private String customer_name;
 
@@ -19,7 +19,7 @@ public class Customer {
 
     private String customer_phone;
 
-    public Customer ( String customer_id, String customer_name, String vip_status, String vip_expire, String customer_address, String customer_phone) {
+    public Customer ( int customer_id, String customer_name, String vip_status, String vip_expire, String customer_address, String customer_phone) {
         this.customer_id = customer_id;
         this.customer_name = customer_name;
         this.vip_status = vip_status;

@@ -9,4 +9,7 @@ public interface RestaurantRepository {
     List<Restaurant> findRestaurant();
 
     Restaurant findRestaurantById(int restaurant_id);
+
+    void updateRestaurant(Restaurant restaurant);
+
 }
