@@ -270,7 +270,7 @@ Check category from specific restaurant
 }
 ```
 
-**POST** `/api/orderitems`
+**POST** `/category`
 Add category
 ```shell
 curl -X POST http://localhost:8080/category \
