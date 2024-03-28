@@ -12,8 +12,6 @@ public class Restaurant {
 
     private String restaurant_name;
 
-    private String restaurant_category;
-
     private int restaurant_rating;
 
     private int restaurant_revenue;
@@ -24,15 +22,17 @@ public class Restaurant {
 
     private String restaurant_hero_image;
 
-    public Restaurant (int restaurant_id, String restaurant_name,String restaurant_category, int restaurant_rating, int restaurant_revenue, String restaurant_address, int restaurant_phone, String restaurant_hero_image){
+    private int category_id;
+
+    public Restaurant (int restaurant_id, String restaurant_name, int restaurant_rating, int restaurant_revenue, String restaurant_address, int restaurant_phone, int category_id){
         this.restaurant_id = restaurant_id;
         this.restaurant_name = restaurant_name;
-        this.restaurant_category = restaurant_category;
         this.restaurant_rating = restaurant_rating;
         this.restaurant_revenue = restaurant_revenue;
         this.restaurant_address = restaurant_address;
         this.restaurant_phone = restaurant_phone;
         this.restaurant_hero_image = restaurant_hero_image;
+        this.category_id = category_id;
     }
 }
 

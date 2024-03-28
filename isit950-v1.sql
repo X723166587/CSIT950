@@ -177,13 +177,15 @@ DROP TABLE IF EXISTS `restaurant`;
 CREATE TABLE `restaurant` (
   `restaurant_id` int NOT NULL AUTO_INCREMENT,
   `restaurant_name` varchar(50) NOT NULL,
-  `restaurant_category` varchar(30) DEFAULT NULL,
   `restaurant_rating` decimal(2,1) DEFAULT NULL,
   `restaurant_revenue` decimal(15,2) DEFAULT NULL,
   `restaurant_address` varchar(255) DEFAULT NULL,
   `restaurant_phone` char(20) DEFAULT NULL,
   `restaurant_hero_image` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`restaurant_id`)
+  `category_id` int DEFAULT NULL,
+  PRIMARY KEY (`restaurant_id`),
+  KEY `fk_restaurant_category` (`category_id`),
+  CONSTRAINT `fk_restaurant_category` FOREIGN KEY (`category_id`) REFERENCES `RestaurantCategory` (`category_Id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -193,7 +195,7 @@ CREATE TABLE `restaurant` (
 
 LOCK TABLES `restaurant` WRITE;
 /*!40000 ALTER TABLE `restaurant` DISABLE KEYS */;
-INSERT INTO `restaurant` VALUES (1,'Tasty Treats','Cafe',4.5,10000.00,'123 Main St','412562170','image1.jpg'),(2,'Savory Sensations','Fine Dining',4.8,20000.00,'456 Side St','923123522','image2.jpg');
+INSERT INTO `restaurant` VALUES (1,'Tasty Treats',4.5,10000.00,'123 Main St','412562170','image1.jpg',1),(2,'Savory Sensations',4.8,20000.00,'456 Side St','923123522','image2.jpg',2);
 /*!40000 ALTER TABLE `restaurant` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -206,4 +208,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-25 18:14:38
+-- Dump completed on 2024-03-28 12:07:00

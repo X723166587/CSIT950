@@ -20,22 +20,22 @@ Retrieves a list of all restaurants, including details such as ID, name, categor
   {
     "restaurant_id": 1,
     "restaurant_name": "Tasty Treats",
-    "restaurant_category": "Cafe",
     "restaurant_rating": 4,
     "restaurant_revenue": 10000,
     "restaurant_address": "123 Main St",
     "restaurant_phone": 412562170,
-    "restaurant_hero_image": "image1.jpg"
+    "restaurant_hero_image": null,
+    "category_id": 1
   },
   {
     "restaurant_id": 2,
     "restaurant_name": "Savory Sensations",
-    "restaurant_category": "Fine Dining",
     "restaurant_rating": 4,
     "restaurant_revenue": 20000,
     "restaurant_address": "456 Side St",
     "restaurant_phone": 923123522,
-    "restaurant_hero_image": "image2.jpg"
+    "restaurant_hero_image": null,
+    "category_id": 2
   }
 ]
 ```
@@ -178,12 +178,12 @@ Get specific restaurant details
 {
   "restaurant_id": 1,
   "restaurant_name": "Tasty Treats",
-  "restaurant_category": "Cafe",
   "restaurant_rating": 4,
   "restaurant_revenue": 10000,
   "restaurant_address": "123 Main St",
   "restaurant_phone": 412562170,
-  "restaurant_hero_image": "image1.jpg"
+  "restaurant_hero_image": null,
+  "category_id": 1
 }
 ```
 
@@ -259,8 +259,28 @@ curl -X POST http://localhost:8080/api/orderitems \
 > -d '[{"orderId": 2, "itemId": 2, "quantity": 1}, {"orderId": 2, "itemId": 13, "quantity": 1}]'
 ```
 
+**GET** `/category/{Restaurant_Id}/category`
+Check category from specific restaurant
+```json
+{
+  "categoryId": 1,
+  "categoryName": "Indian",
+  "categoryIcon": "🍛",
+  "categorySlug": "//category/indian"
+}
+```
 
-
+**POST** `/api/orderitems`
+Add category
+```shell
+curl -X POST http://localhost:8080/category \
+> -H "Content-Type: application/json" \
+> -d '{
+>   "categoryName": "New Category",
+>   "categoryIcon": "🆕",
+>   "categorySlug": "/new-category"
+> }
+```
 
 
 
