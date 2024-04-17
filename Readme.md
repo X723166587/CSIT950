@@ -25,7 +25,8 @@ Retrieves a list of all restaurants, including details such as ID, name, categor
     "restaurant_address": "123 Main St",
     "restaurant_phone": 412562170,
     "restaurant_hero_image": null,
-    "category_id": 1
+    "category_id": 1,
+    "password":"000000"
   },
   {
     "restaurant_id": 2,
@@ -35,7 +36,8 @@ Retrieves a list of all restaurants, including details such as ID, name, categor
     "restaurant_address": "456 Side St",
     "restaurant_phone": 923123522,
     "restaurant_hero_image": null,
-    "category_id": 2
+    "category_id": 2,
+    "password":"000000"
   }
 ]
 ```
@@ -51,7 +53,8 @@ Retrieves a list of all customers. The information includes customer ID, name, V
     "vip_status": "active",
     "vip_expire": "2024-12-31",
     "customer_address": "789 Hill Rd",
-    "customer_phone": "555-7890"
+    "customer_phone": "555-7890",
+    "password":"000000"
   },
   {
     "customer_id": 2,
@@ -59,7 +62,8 @@ Retrieves a list of all customers. The information includes customer ID, name, V
     "vip_status": "",
     "vip_expire": null,
     "customer_address": "321 Lake Ave",
-    "customer_phone": "555-6543"
+    "customer_phone": "555-6543",
+    "password":"000000"
   },
   {
     "customer_id": 3,
@@ -67,7 +71,8 @@ Retrieves a list of all customers. The information includes customer ID, name, V
     "vip_status": "active",
     "vip_expire": "2024-12-31",
     "customer_address": "123 Elm Street",
-    "customer_phone": "555-1234"
+    "customer_phone": "555-1234",
+    "password":"000000"
   }
 ]
 ```
@@ -82,7 +87,8 @@ Obtains detailed information about a specific customer by their unique customer 
   "vip_status": "active",
   "vip_expire": "2024-12-31",
   "customer_address": "789 Hill Rd",
-  "customer_phone": "555-7890"
+  "customer_phone": "555-7890",
+  "password":"000000"
 }
 ```
 
@@ -183,7 +189,8 @@ Get specific restaurant details
   "restaurant_address": "123 Main St",
   "restaurant_phone": 412562170,
   "restaurant_hero_image": null,
-  "category_id": 1
+  "category_id": 1,
+  "password":"000000"
 }
 ```
 
@@ -197,7 +204,8 @@ curl -X POST http://localhost:8080/customer \
 "vip_status": 1,
 "vip_expire": "2024-12-31",
 "customer_address": "123 Elm Street",
-"customer_phone": "555-1234"
+"customer_phone": "555-1234",
+"password": "000000"
 }'
 ```
 
@@ -281,6 +289,38 @@ curl -X POST http://localhost:8080/category \
 >   "categorySlug": "/new-category"
 > }
 ```
+
+**POST** ``
+Check login for delivery person
+```shell
+curl -X POST 'http://localhost:8080/customer/login' \
+> --data-urlencode "customer_name=JohnDoe" \
+> --data-urlencode "password=123Password"
+```
+## If the password is wrong, will return "Invalid credentials"
+
+
+**POST** ``
+Check login for customer
+```shell
+curl -X POST 'http://localhost:8080/customer/login' \
+--data-urlencode "customer_name=JohnDoe" \
+--data-urlencode "password=123Password"
+```
+## If the password is wrong, will return "Invalid credentials"
+
+
+**POST** ``
+Check login for restaurant
+```shell
+curl -X POST 'http://localhost:8080/restaurant/login' \
+--data-urlencode "restaurantName=TastyTreats" \
+--data-urlencode "password=SecretPassword"
+```
+## If the password is wrong, will return "Invalid credentials"
+
+
+
 
 
 

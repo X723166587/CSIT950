@@ -19,13 +19,16 @@ public class Customer {
 
     private String customer_phone;
 
-    public Customer ( int customer_id, String customer_name, String vip_status, String vip_expire, String customer_address, String customer_phone) {
+    private String password;
+
+    public Customer ( int customer_id, String customer_name, String vip_status, String vip_expire, String customer_address, String customer_phone, String password) {
         this.customer_id = customer_id;
         this.customer_name = customer_name;
         this.vip_status = vip_status;
         this.vip_expire = vip_expire;
         this.customer_address = customer_address;
         this.customer_phone = customer_phone;
+        this.password = password;
     }
 
 }

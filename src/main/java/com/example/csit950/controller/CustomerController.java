@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -38,6 +39,17 @@ public class CustomerController {
         Customer savedCustomer = customerRepo.save(customer);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCustomer);
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> loginCustomer(@RequestParam String customer_name, @RequestParam String password) {
+        Optional<Customer> customer = customerRepo.findCustomerByNameAndPassword(customer_name, password);
+        if (customer.isPresent()) {
+            return ResponseEntity.ok().body("Customer login successful");
+        } else {
+            return ResponseEntity.status(401).body("Invalid credentials");
+        }
+    }
+
 }
 
 

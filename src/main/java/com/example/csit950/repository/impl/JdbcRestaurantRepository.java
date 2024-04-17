@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class JdbcRestaurantRepository implements RestaurantRepository {
@@ -20,7 +21,7 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
 
     @Override
     public List<Restaurant> findRestaurant() {
-        return jdbc.query("SELECT restaurant_id,restaurant_name,restaurant_rating,restaurant_revenue,restaurant_address,restaurant_phone,restaurant_hero_image,category_id FROM Restaurant", this::mapRowToRestaurant);
+        return jdbc.query("SELECT restaurant_id,restaurant_name,restaurant_rating,restaurant_revenue,restaurant_address,restaurant_phone,restaurant_hero_image,category_id,password FROM Restaurant", this::mapRowToRestaurant);
     }
 
     private Restaurant mapRowToRestaurant(ResultSet rs, int rowNum) throws SQLException {
@@ -31,7 +32,8 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
                 rs.getInt("restaurant_revenue"),
                 rs.getString("restaurant_address"),
                 rs.getInt("restaurant_phone"),
-                rs.getInt("category_id")
+                rs.getInt("category_id"),
+                rs.getString("password")
         );
     }
 
@@ -46,6 +48,17 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
     public void updateRestaurant(Restaurant restaurant) {
         String sql = "UPDATE Restaurant SET restaurant_name = ?, restaurant_category = ?, restaurant_rating = ?, restaurant_revenue = ?, restaurant_address = ?, restaurant_phone = ?, restaurant_hero_image = ? WHERE restaurant_id = ?";
         jdbc.update(sql, restaurant.getRestaurant_name(), restaurant.getRestaurant_rating(), restaurant.getRestaurant_revenue(), restaurant.getRestaurant_address(), restaurant.getRestaurant_phone(), restaurant.getRestaurant_hero_image(), restaurant.getRestaurant_id(),restaurant.getCategory_id());
+    }
+
+    @Override
+    public Optional<Restaurant> findRestaurantByNameAndPassword(String restaurantName, String password) {
+        String sql = "SELECT * FROM Restaurant WHERE restaurant_name = ? AND password = ?";
+        try {
+            Restaurant restaurant = jdbc.queryForObject(sql, new Object[]{restaurantName, password}, this::mapRowToRestaurant);
+            return Optional.ofNullable(restaurant);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
     }
 
 

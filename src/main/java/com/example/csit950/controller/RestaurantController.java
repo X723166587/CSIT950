@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/restaurant")
@@ -40,6 +41,16 @@ public class RestaurantController {
         restaurant.setRestaurant_id(restaurantId); // Ensure the ID is set correctly
         restaurantRepo.updateRestaurant(restaurant);
         return ResponseEntity.ok().body("Restaurant updated successfully.");
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> loginRestaurant(@RequestParam String restaurantName, @RequestParam String password) {
+        Optional<Restaurant> restaurant = restaurantRepo.findRestaurantByNameAndPassword(restaurantName, password);
+        if (restaurant.isPresent()) {
+            return ResponseEntity.ok().body("Restaurant login successful");
+        } else {
+            return ResponseEntity.status(401).body("Invalid credentials");
+        }
     }
 
 }

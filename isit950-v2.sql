@@ -16,31 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `customer`
+-- Table structure for table `Customer`
 --
 
-DROP TABLE IF EXISTS `customer`;
+DROP TABLE IF EXISTS `Customer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `customer` (
+CREATE TABLE `Customer` (
   `customer_id` int NOT NULL AUTO_INCREMENT,
   `customer_name` varchar(20) NOT NULL,
   `vip_status` enum('active','expired','none') DEFAULT NULL,
   `vip_expire` date DEFAULT NULL,
   `customer_address` varchar(255) DEFAULT NULL,
   `customer_phone` char(20) DEFAULT NULL,
+  `password` varchar(255) DEFAULT '000000',
   PRIMARY KEY (`customer_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `customer`
+-- Dumping data for table `Customer`
 --
 
-LOCK TABLES `customer` WRITE;
-/*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,'Alice Smith','active','2024-12-31','789 Hill Rd','555-7890'),(2,'Bob Johnson','',NULL,'321 Lake Ave','555-6543'),(3,'John Doe','active','2024-12-31','123 Elm Street','555-1234'),(4,'John Doe','active','2024-12-31','123 Elm Street','555-1234');
-/*!40000 ALTER TABLE `customer` ENABLE KEYS */;
+LOCK TABLES `Customer` WRITE;
+/*!40000 ALTER TABLE `Customer` DISABLE KEYS */;
+INSERT INTO `Customer` VALUES (1,'Alice Smith','active','2024-12-31','789 Hill Rd','555-7890','000000'),(2,'Bob Johnson','',NULL,'321 Lake Ave','555-6543','000000'),(3,'John Doe','active','2024-12-31','123 Elm Street','555-1234','000000'),(4,'John Doe','active','2024-12-31','123 Elm Street','555-1234','000000');
+/*!40000 ALTER TABLE `Customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -93,6 +94,7 @@ CREATE TABLE `DeliveryPerson` (
   `delivery_person_id` int NOT NULL AUTO_INCREMENT,
   `delivery_person_name` varchar(255) NOT NULL,
   `delivery_person_phone_number` varchar(20) NOT NULL,
+  `password` varchar(255) DEFAULT '000000',
   PRIMARY KEY (`delivery_person_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -103,7 +105,7 @@ CREATE TABLE `DeliveryPerson` (
 
 LOCK TABLES `DeliveryPerson` WRITE;
 /*!40000 ALTER TABLE `DeliveryPerson` DISABLE KEYS */;
-INSERT INTO `DeliveryPerson` VALUES (1,'John Doe','555-1122'),(2,'Jane Roe','555-3344');
+INSERT INTO `DeliveryPerson` VALUES (1,'John Doe','555-1122','000000'),(2,'Jane Roe','555-3344','000000');
 /*!40000 ALTER TABLE `DeliveryPerson` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,13 +170,13 @@ INSERT INTO `OrderItems` VALUES (1,1,2),(1,2,1),(2,2,1),(2,13,1);
 UNLOCK TABLES;
 
 --
--- Table structure for table `restaurant`
+-- Table structure for table `Restaurant`
 --
 
-DROP TABLE IF EXISTS `restaurant`;
+DROP TABLE IF EXISTS `Restaurant`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `restaurant` (
+CREATE TABLE `Restaurant` (
   `restaurant_id` int NOT NULL AUTO_INCREMENT,
   `restaurant_name` varchar(50) NOT NULL,
   `restaurant_rating` decimal(2,1) DEFAULT NULL,
@@ -183,6 +185,7 @@ CREATE TABLE `restaurant` (
   `restaurant_phone` char(20) DEFAULT NULL,
   `restaurant_hero_image` varchar(255) DEFAULT NULL,
   `category_id` int DEFAULT NULL,
+  `password` varchar(255) DEFAULT '000000',
   PRIMARY KEY (`restaurant_id`),
   KEY `fk_restaurant_category` (`category_id`),
   CONSTRAINT `fk_restaurant_category` FOREIGN KEY (`category_id`) REFERENCES `RestaurantCategory` (`category_Id`) ON DELETE SET NULL ON UPDATE CASCADE
@@ -190,13 +193,13 @@ CREATE TABLE `restaurant` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `restaurant`
+-- Dumping data for table `Restaurant`
 --
 
-LOCK TABLES `restaurant` WRITE;
-/*!40000 ALTER TABLE `restaurant` DISABLE KEYS */;
-INSERT INTO `restaurant` VALUES (1,'Tasty Treats',4.5,10000.00,'123 Main St','412562170','image1.jpg',1),(2,'Savory Sensations',4.8,20000.00,'456 Side St','923123522','image2.jpg',2);
-/*!40000 ALTER TABLE `restaurant` ENABLE KEYS */;
+LOCK TABLES `Restaurant` WRITE;
+/*!40000 ALTER TABLE `Restaurant` DISABLE KEYS */;
+INSERT INTO `Restaurant` VALUES (1,'Tasty Treats',4.5,10000.00,'123 Main St','412562170','image1.jpg',1,'000000'),(2,'Savory Sensations',4.8,20000.00,'456 Side St','923123522','image2.jpg',2,'000000');
+/*!40000 ALTER TABLE `Restaurant` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -208,4 +211,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-28 12:07:00
+-- Dump completed on 2024-04-17 19:08:12
