@@ -48,10 +48,10 @@ UNLOCK TABLES;
 -- Table structure for table `customerorder`
 --
 
-DROP TABLE IF EXISTS `customerorder`;
+DROP TABLE IF EXISTS `CustomerOrder`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `customerorder` (
+CREATE TABLE `CustomerOrder` (
   `order_id` int NOT NULL AUTO_INCREMENT,
   `restaurant_id` int DEFAULT NULL,
   `customer_id` int DEFAULT NULL,
@@ -77,9 +77,9 @@ CREATE TABLE `customerorder` (
 -- Dumping data for table `customerorder`
 --
 
-LOCK TABLES `customerorder` WRITE;
+LOCK TABLES `CustomerOrder` WRITE;
 /*!40000 ALTER TABLE `customerorder` DISABLE KEYS */;
-INSERT INTO `customerorder` VALUES (1,1,1,'confirmed','Please deliver quickly.',20.00,4.5,'\"Excellent service and delicious food. Highly recommended!\"',2.00,'2024-03-18 14:28:54',NULL),(2,2,2,'delivered','',30.00,NULL,NULL,3.00,'2024-03-18 14:28:54',NULL),(3,1,1,'confirmed',NULL,27.50,NULL,NULL,3.99,'2024-03-18 14:28:54',NULL);
+INSERT INTO `CustomerOrder` VALUES (1,1,1,'confirmed','Please deliver quickly.',20.00,4.5,'\"Excellent service and delicious food. Highly recommended!\"',2.00,'2024-03-18 14:28:54',NULL),(2,2,2,'delivered','',30.00,NULL,NULL,3.00,'2024-03-18 14:28:54',NULL),(3,1,1,'confirmed',NULL,27.50,NULL,NULL,3.99,'2024-03-18 14:28:54',NULL);
 /*!40000 ALTER TABLE `customerorder` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -154,7 +154,7 @@ CREATE TABLE `OrderItems` (
   `quantity` int DEFAULT '1',
   PRIMARY KEY (`order_id`,`item_id`),
   KEY `item_id` (`item_id`),
-  CONSTRAINT `orderitems_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `customerOrder` (`order_id`),
+  CONSTRAINT `orderitems_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `CustomerOrder` (`order_id`),
   CONSTRAINT `orderitems_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `menu` (`item_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

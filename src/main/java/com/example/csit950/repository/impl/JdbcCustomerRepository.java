@@ -23,13 +23,13 @@ public class JdbcCustomerRepository implements CustomerRepository {
 
     @Override
     public List<Customer> findAll() {
-        return jdbc.query("SELECT customer_id,customer_name,vip_status,vip_expire,customer_address,customer_phone,password FROM Customer", new CustomerMapper());
+        return jdbc.query("SELECT customer_id,customer_name,vip_status,vip_expire,customer_address,customer_phone,password,email FROM Customer", new CustomerMapper());
     }
 
     @Override
     public Customer findOne(String customer_id) {
         // Adjusted to also select customer_id, even though it's known, for consistent mapping.
-        Customer customer = jdbc.queryForObject("SELECT customer_id,customer_name,vip_status,vip_expire,customer_address,customer_phone,password FROM Customer WHERE customer_id = ?", new CustomerMapper(), customer_id);
+        Customer customer = jdbc.queryForObject("SELECT customer_id,customer_name,vip_status,vip_expire,customer_address,customer_phone,password,email FROM Customer WHERE customer_id = ?", new CustomerMapper(), customer_id);
         return customer;
     }
 
@@ -44,14 +44,15 @@ public class JdbcCustomerRepository implements CustomerRepository {
                     rs.getString("vip_expire"),
                     rs.getString("customer_address"),
                     rs.getString("customer_phone"),
-                    rs.getString("password"));
+                    rs.getString("password"),
+                    rs.getString("email"));
         }
 
     }
 
     @Override
     public Customer save(Customer customer) {
-        String sql = "INSERT INTO Customer (customer_name, vip_status, vip_expire, customer_address, customer_phone,password) VALUES (?, ?, ?, ?, ?,?)";
+        String sql = "INSERT INTO Customer (customer_name, vip_status, vip_expire, customer_address, customer_phone,password,email) VALUES (?, ?, ?, ?, ?,?)";
         jdbc.update(sql, customer.getCustomer_name(), customer.getVip_status(), customer.getVip_expire(), customer.getCustomer_address(), customer.getCustomer_phone(),customer.getPassword());
         return customer;
     }

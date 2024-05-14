@@ -26,7 +26,9 @@ public class Restaurant {
 
     private String password;
 
-    public Restaurant (int restaurant_id, String restaurant_name, int restaurant_rating, int restaurant_revenue, String restaurant_address, int restaurant_phone, int category_id, String password){
+    private String email;
+
+    public Restaurant (int restaurant_id, String restaurant_name, int restaurant_rating, int restaurant_revenue, String restaurant_address, int restaurant_phone, String restaurant_hero_image, int category_id, String password, String email){
         this.restaurant_id = restaurant_id;
         this.restaurant_name = restaurant_name;
         this.restaurant_rating = restaurant_rating;
@@ -36,6 +38,7 @@ public class Restaurant {
         this.restaurant_hero_image = restaurant_hero_image;
         this.category_id = category_id;
         this.password = password;
+        this.email = email;
     }
 }
 

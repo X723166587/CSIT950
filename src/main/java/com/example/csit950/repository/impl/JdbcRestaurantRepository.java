@@ -21,7 +21,7 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
 
     @Override
     public List<Restaurant> findRestaurant() {
-        return jdbc.query("SELECT restaurant_id,restaurant_name,restaurant_rating,restaurant_revenue,restaurant_address,restaurant_phone,restaurant_hero_image,category_id,password FROM Restaurant", this::mapRowToRestaurant);
+        return jdbc.query("SELECT restaurant_id,restaurant_name,restaurant_rating,restaurant_revenue,restaurant_address,restaurant_phone,restaurant_hero_image,category_id,password,email FROM Restaurant", this::mapRowToRestaurant);
     }
 
     private Restaurant mapRowToRestaurant(ResultSet rs, int rowNum) throws SQLException {
@@ -32,8 +32,10 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
                 rs.getInt("restaurant_revenue"),
                 rs.getString("restaurant_address"),
                 rs.getInt("restaurant_phone"),
+                rs.getString("restaurant_hero_image"),
                 rs.getInt("category_id"),
-                rs.getString("password")
+                rs.getString("password"),
+                rs.getString("email")
         );
     }
 

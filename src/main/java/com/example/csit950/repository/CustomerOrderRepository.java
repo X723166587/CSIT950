@@ -14,4 +14,6 @@ public interface CustomerOrderRepository {
     List<Order> findOrdersByRestaurantId(String restaurant_id);
 
     void updateOrderReview(String order_id, String newReview);
+
+    List<Order> findOrdersByCustomerId(String customer_id);
 }

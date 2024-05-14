@@ -57,4 +57,14 @@ public class OrderController {
             return ResponseEntity.badRequest().body("Failed to update order review: " + e.getMessage());
         }
     }
+
+    @GetMapping("/customer/{customerId}")
+    public ResponseEntity<List<Order>> findOrdersByCustomerId(@PathVariable("customerId") String customer_id) {
+        try {
+            List<Order> orders = orderRepo.findOrdersByCustomerId(customer_id);
+            return ResponseEntity.ok(orders);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(null);  // Consider a more descriptive error message or handling
+        }
+    }
 }

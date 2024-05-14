@@ -99,8 +99,7 @@ Create new order when customer submit order
 curl -X POST http://localhost:8080/orders \
 -H "Content-Type: application/json" \
 -d '{
-    "order_id": "1",
-    "restaurant_id": "1",
+    "restaurant_id": 1,
     "customer_id": "1",
     "order_status": "confirmed",
     "order_subtotal": "27.5",
@@ -319,6 +318,34 @@ curl -X POST 'http://localhost:8080/restaurant/login' \
 ```
 ## If the password is wrong, will return "Invalid credentials"
 
+
+**GET** `/orders/customer/{customer_id}`
+Check category from specific restaurant
+```json
+[{
+  "order_id": "1",
+  "restaurant_id": 1,
+  "customer_id": "1",
+  "order_status": "confirmed",
+  "comment": "Please deliver quickly.",
+  "order_subtotal": "20.00",
+  "order_rating": "4.5",
+  "order_review": "\"Excellent service and delicious food. Highly recommended!\"",
+  "order_service_fee": "2.00",
+  "create_time": "2024-05-14T14:11:27.530763"
+}, {
+  "order_id": "3",
+  "restaurant_id": 1,
+  "customer_id": "1",
+  "order_status": "confirmed",
+  "comment": null,
+  "order_subtotal": "27.50",
+  "order_rating": null,
+  "order_review": null,
+  "order_service_fee": "3.99",
+  "create_time": "2024-05-14T14:11:27.530862"
+}]
+```
 
 
 

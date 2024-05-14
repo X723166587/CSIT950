@@ -38,6 +38,7 @@ public class JdbcOrderRepository implements CustomerOrderRepository {
         parameters.put("order_rating", order.getOrder_rating());
         parameters.put("order_review", order.getOrder_review());
         parameters.put("order_service_fee", order.getOrder_service_fee());
+        parameters.put("create_time", order.getCreate_time());
 
         Number newId = simpleJdbcInsert.executeAndReturnKey(parameters);
         order.setOrder_id(newId.toString());
@@ -47,7 +48,7 @@ public class JdbcOrderRepository implements CustomerOrderRepository {
     private Order mapRowToOrder(ResultSet rs, int rowNum) throws SQLException {
         return new Order(
                 rs.getString("order_id"), // This will now work for both methods.
-                rs.getString("restaurant_id"),
+                rs.getInt("restaurant_id"),
                 rs.getString("customer_id"),
                 rs.getString("order_status"),
                 rs.getString("comment"),
@@ -55,6 +56,12 @@ public class JdbcOrderRepository implements CustomerOrderRepository {
                 rs.getString("order_rating"),
                 rs.getString("order_review"),
                 rs.getString("order_service_fee"));
+    }
+
+    @Override
+    public List<Order> findOrdersByCustomerId(String customer_id) {
+        String sql = "SELECT * FROM CustomerOrder WHERE customer_id = ?";
+        return jdbcTemplate.query(sql, this::mapRowToOrder, customer_id);
     }
 
     @Override

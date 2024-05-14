@@ -21,7 +21,9 @@ public class Customer {
 
     private String password;
 
-    public Customer ( int customer_id, String customer_name, String vip_status, String vip_expire, String customer_address, String customer_phone, String password) {
+    private String email;
+
+    public Customer ( int customer_id, String customer_name, String vip_status, String vip_expire, String customer_address, String customer_phone, String password, String email) {
         this.customer_id = customer_id;
         this.customer_name = customer_name;
         this.vip_status = vip_status;
@@ -29,6 +31,7 @@ public class Customer {
         this.customer_address = customer_address;
         this.customer_phone = customer_phone;
         this.password = password;
+        this.email = email;
     }
 
 }
